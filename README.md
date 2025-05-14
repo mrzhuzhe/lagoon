@@ -2,7 +2,7 @@
 STM32 driver and RTOS playgroud
 
 
-1. In STM32 HAL lib STM3F1032C8T6 as same as STM32F103xB 
+1. In STM32 HAL lib treat STM3F1032C8T6 as same as STM32F103xB 
 
     Ref: Cmiss/Device/ST/STM32F1xx/Include/stm32f1xx.h
     
