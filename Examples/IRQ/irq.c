@@ -20,13 +20,24 @@ void init_irq() {
     
     GPIO_Config.Pin = GPIO_PIN_7 | GPIO_PIN_5 | GPIO_PIN_3 | GPIO_PIN_1;
     HAL_GPIO_Init(GPIOA, &GPIO_Config);  
-    
+
     GPIO_Config.Pin =  GPIO_PIN_13 | GPIO_PIN_15;
     HAL_GPIO_Init(GPIOC, &GPIO_Config);
     
     /* EXTI interrupt init*/
     HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+
+    HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(EXTI3_IRQn);
+
+    // Error EXTI9_5_IRQn will crash
+    // HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+    // HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+    HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 }
 
 void EXTI1_IRQHandler(void) {
@@ -34,6 +45,21 @@ void EXTI1_IRQHandler(void) {
    // seems all gpio with GPIO_MODE_IT_RISING_FALLING can trigger exti
    HAL_GPIO_EXTI_Callback(GPIO_PIN_13);    
 }
+
+void EXTI3_IRQHandler(void) {
+   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3);
+}
+
+void EXT9_5_IRQHandler(void) {
+   //HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5 | GPIO_PIN_7);
+   // Error this dont work
+   HAL_GPIO_EXTI_Callback(GPIO_PIN_13); 
+}
+
+void EXTI15_10_IRQHandler(void) {
+   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11 | GPIO_PIN_13 | GPIO_PIN_15);
+}
+
 
 unsigned io_code = 0b11111111;
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){ 
