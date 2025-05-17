@@ -20,7 +20,7 @@ void init_irq() {
     
     GPIO_Config.Pin = GPIO_PIN_7 | GPIO_PIN_5 | GPIO_PIN_3 | GPIO_PIN_1;
     HAL_GPIO_Init(GPIOA, &GPIO_Config);  
-
+    
     GPIO_Config.Pin =  GPIO_PIN_13 | GPIO_PIN_15;
     HAL_GPIO_Init(GPIOC, &GPIO_Config);
     
@@ -30,8 +30,9 @@ void init_irq() {
 }
 
 void EXTI1_IRQHandler(void) {
-   //HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
-   HAL_GPIO_EXTI_Callback(GPIO_PIN_15);
+   //HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1); // Notice EXTI1-4 is ok but 5-15 cannot be trigger by IRQHandler
+   // seems all gpio with GPIO_MODE_IT_RISING_FALLING can trigger exti
+   HAL_GPIO_EXTI_Callback(GPIO_PIN_13);    
 }
 
 unsigned io_code = 0b11111111;
