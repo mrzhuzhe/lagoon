@@ -56,7 +56,7 @@ srec:	$(DEPS) $(BINARY).srec
 list:	$(DEPS) $(BINARY).list
 
 # Define a helper macro for debugging make errors online
-# you can type "make print-OPENCM3_DIR" and it will show you
+# you can type "make print-STM32_HAL_DIR" and it will show you
 # how that ended up being resolved by all of the included
 # makefiles.
 print-%:
