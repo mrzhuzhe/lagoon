@@ -8,7 +8,7 @@ void init_irq() {
     GPIO_InitTypeDef GPIO_Config;
 
     GPIO_Config.Mode = GPIO_MODE_INPUT;
-    // GPIO_Config.Pull = GPIO_NOPULL;
+    GPIO_Config.Pull = GPIO_PULLUP;
     GPIO_Config.Speed = GPIO_SPEED_FREQ_HIGH;
 
     GPIO_Config.Pin = GPIO_PIN_11;
