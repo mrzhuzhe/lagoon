@@ -1,7 +1,7 @@
 #include <stm32f1xx_hal.h>
 #include "oled.h"
 #include "irq.h"
-
+#include "uart.h"
 
 void SysTick_Handler(void)
 {

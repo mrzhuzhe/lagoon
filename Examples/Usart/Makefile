@@ -2,10 +2,11 @@
 #  Project
 ######################################################################
 
-BINARY		= irq
+BINARY		= Usart
 SRCFILES	= main.c
 SRCFILES	+= oled.c
 SRCFILES	+= irq.c
+SRCFILES	+= uart.c
 
 
 SRCFILES	+= Hal/Src/stm32f1xx_hal.c
