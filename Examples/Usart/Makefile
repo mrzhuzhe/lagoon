@@ -19,7 +19,7 @@ SRCFILES	+= Hal/Src/stm32f1xx_hal_flash.c
 SRCFILES	+= Hal/Src/stm32f1xx_hal_cortex.c
 SRCFILES	+= Hal/Src/stm32f1xx_hal_i2c.c
 SRCFILES	+= Hal/Src/stm32f1xx_hal_exti.c
-
+SRCFILES	+= Hal/Src/stm32f1xx_hal_usart.c
 
 all: elf bin
 
