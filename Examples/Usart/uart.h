@@ -2,6 +2,7 @@
 #define __UART_H
 
 void Uart_init();
-USART_HandleTypeDef* getUsartH();
+UART_HandleTypeDef* getUsartH();
+void itoa(uint32_t Number, char* output, uint32_t Length);
 
 #endif
