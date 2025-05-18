@@ -2,5 +2,6 @@
 #define __UART_H
 
 void Uart_init();
+USART_HandleTypeDef* getUsartH();
 
 #endif

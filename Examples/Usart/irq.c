@@ -1,5 +1,23 @@
 #include <stm32f1xx_hal.h>
 #include "oled.h"
+#include "uart.h"
+
+uint32_t u_pow(uint32_t X, uint32_t Y)
+{
+	uint32_t Result = 1;
+	while (Y--)
+	{
+		Result *= X;
+	}
+	return Result;
+}
+
+void itoa(uint32_t Number, char* output, uint32_t Length){
+	for (uint8_t i = 0; i < Length; i++)							
+	{
+		output[i] = Number / u_pow(2, Length - i - 1) % 2 + '0';
+	}
+}
 
 void init_irq() {
 
@@ -76,5 +94,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
         //HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, (GPIO_PinState)cur_code);
         io_code = cur_code;
         OLED_ShowBinNum(2, 1, io_code, 8);
+        uint8_t Test[10] = "12345678\n";
+        itoa(io_code, Test, 8);
+        HAL_USART_Transmit(getUsartH(), (uint8_t*)Test, sizeof(Test), 10);
     }
+    
 }

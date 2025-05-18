@@ -37,11 +37,14 @@ void Uart_init(){
     UsartHandle.Init.Mode       = USART_MODE_TX_RX;
     HAL_USART_Init(&UsartHandle);
 
-    uint8_t Test[] = "Hello World !!!\r\n"; 
-    HAL_USART_Transmit(&UsartHandle, Test, sizeof(Test), 10);
+    // uint8_t Test[] = "Hello World !!!\r\n"; 
+    //HAL_USART_Transmit(&UsartHandle, Test, sizeof(Test), 10);
 
 }
 
+USART_HandleTypeDef* getUsartH(){
+    return &UsartHandle;
+}
 // void HAL_USART_RxCpltCallback(USART_HandleTypeDef *husart) {
 //    OLED_ShowBinNum(2, 1, 123, 8); 
 // }
