@@ -93,10 +93,21 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
     if (cur_code != io_code){
         //HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, (GPIO_PinState)cur_code);
         io_code = cur_code;
-        OLED_ShowBinNum(2, 1, io_code, 8);
+        //   OLED_ShowBinNum(2, 1, io_code, 8);
         uint8_t Test[10] = "12345678\n";
         itoa(io_code, Test, 8);
-        HAL_USART_Transmit(getUsartH(), (uint8_t*)Test, sizeof(Test), 10);
+        while(HAL_USART_Transmit(getUsartH(), (uint8_t*)Test, sizeof(Test), 10));
+        OLED_ShowBinNum(2, 1, io_code, 8);
     }
     
 }
+
+// unsigned pre_code = 0b11111111;
+// void SysTick_Handler(void)
+// {
+//     HAL_IncTick();
+//     if (pre_code != io_code){
+//         pre_code = io_code;
+//         OLED_ShowBinNum(2, 1, io_code, 8);
+//     }
+// }
