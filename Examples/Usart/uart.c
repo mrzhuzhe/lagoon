@@ -69,7 +69,7 @@ UART_HandleTypeDef* getUsartH(){
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     //while(HAL_USART_Transmit(&UsartHandle, "123\n", sizeof("123\n"), 10));  
-    //HAL_UART_Transmit(&UartHandle, "rxcpl\n", sizeof("rxcpl\n"), 10);
+    HAL_UART_Transmit(&UartHandle, "rxcpl\n", sizeof("rxcpl\n"), 10);
 }
 
 // void HAL_USART_IRQHandler(USART_HandleTypeDef *husart){
@@ -89,8 +89,8 @@ void USART1_IRQHandler(void) {
    //HAL_UART_Transmit_IT(&UartHandle, "3231\n", sizeof("123\n"));
    char Text[10] = "usart2\n";
    //HAL_UART_Receive_IT(&UartHandle, Text, 10);
-   //while(HAL_UART_Receive(&UartHandle, Text, 10, 1));
-   __HAL_USART_CLEAR_FLAG(&UartHandle, USART_IT_RXNE);
+   while(HAL_UART_Receive(&UartHandle, Text, 10, 1));
+   //__HAL_USART_CLEAR_FLAG(&UartHandle, USART_IT_RXNE);
    HAL_UART_IRQHandler(&UartHandle);
    HAL_UART_Transmit(&UartHandle, Text, sizeof(Text), 10);
 }
