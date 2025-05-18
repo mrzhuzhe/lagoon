@@ -85,12 +85,19 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
     
 }
 
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){
+    char Text[10] = "cback\n";
+    //itoa((unsigned)Size, Text, 10);
+    HAL_UART_Transmit(&UartHandle, Text, sizeof(Text), 10);
+}
+
 void USART1_IRQHandler(void) {   
    //HAL_UART_Transmit_IT(&UartHandle, "3231\n", sizeof("123\n"));
    char Text[10] = "usart2\n";
    //HAL_UART_Receive_IT(&UartHandle, Text, 10);
    while(HAL_UART_Receive(&UartHandle, Text, 10, 1));
    //__HAL_USART_CLEAR_FLAG(&UartHandle, USART_IT_RXNE);
+   //while(HAL_UART_Transmit(&UartHandle, Text, sizeof(Text), 10));
    HAL_UART_IRQHandler(&UartHandle);
    HAL_UART_Transmit(&UartHandle, Text, sizeof(Text), 10);
 }
