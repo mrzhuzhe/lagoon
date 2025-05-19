@@ -53,12 +53,14 @@ void Uart_init(){
     HAL_NVIC_SetPriority(USART1_IRQn, 0, 1);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
 
-    __HAL_UART_ENABLE_IT(&UartHandle, USART_IT_RXNE);
+    //__HAL_UART_ENABLE_IT(&UartHandle, USART_IT_RXNE);
 
     // uint8_t Test[] = "Hello World !!!\r\n";
     // char Text[10] = {0};
     // HAL_UART_Receive_IT(&UartHandle, Text, 10);
     //HAL_USART_Transmit(&UsartHandle, Test, sizeof(Test), 10);
+    char Text[10] = "init\n";
+    HAL_UART_Receive_IT(&UartHandle, Text, sizeof(Text));
 
 }
 
@@ -68,8 +70,10 @@ UART_HandleTypeDef* getUsartH(){
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
+    char Text[10] = "usart2\n";
     //while(HAL_USART_Transmit(&UsartHandle, "123\n", sizeof("123\n"), 10));  
     HAL_UART_Transmit(&UartHandle, "rxcpl\n", sizeof("rxcpl\n"), 10);
+    HAL_UART_Receive_IT(&UartHandle, Text, sizeof(Text));
 }
 
 // void HAL_USART_IRQHandler(USART_HandleTypeDef *husart){
@@ -85,21 +89,21 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
     
 }
 
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){
-    char Text[10] = "cback\n";
-    //itoa((unsigned)Size, Text, 10);
-    HAL_UART_Transmit(&UartHandle, Text, sizeof(Text), 10);
-}
+// void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){
+//     char Text[10] = "cback\n";
+//     //itoa((unsigned)Size, Text, 10);
+//     HAL_UART_Transmit(&UartHandle, Text, sizeof(Text), 10);
+// }
 
-void USART1_IRQHandler(void) {   
-   //HAL_UART_Transmit_IT(&UartHandle, "3231\n", sizeof("123\n"));
-   char Text[10] = "usart2\n";
-   //HAL_UART_Receive_IT(&UartHandle, Text, 10);
-   while(HAL_UART_Receive(&UartHandle, Text, 10, 1));
-   //__HAL_USART_CLEAR_FLAG(&UartHandle, USART_IT_RXNE);
-   //while(HAL_UART_Transmit(&UartHandle, Text, sizeof(Text), 10));
-   HAL_UART_IRQHandler(&UartHandle);
-   HAL_UART_Transmit(&UartHandle, Text, sizeof(Text), 10);
-}
+// void USART1_IRQHandler(void) {   
+//    //HAL_UART_Transmit_IT(&UartHandle, "3231\n", sizeof("123\n"));
+//    char Text[10] = "usart2\n";
+//    //HAL_UART_Receive_IT(&UartHandle, Text, 10);
+//    //while(HAL_UART_Receive(&UartHandle, Text, 10, 1));
+//    //__HAL_USART_CLEAR_FLAG(&UartHandle, USART_IT_RXNE);
+//    //while(HAL_UART_Transmit(&UartHandle, Text, sizeof(Text), 10));
+//    HAL_UART_IRQHandler(&UartHandle);
+//    //HAL_UART_Transmit(&UartHandle, Text, sizeof(Text), 10);
+// }
 
 
