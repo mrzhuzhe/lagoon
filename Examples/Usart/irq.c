@@ -26,27 +26,3 @@ void init_irq() {
     HAL_GPIO_Init(GPIOC, &GPIO_Config);   
 
 }
-
-
-// unsigned io_code = 0b11111111;
-// void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){ 
-//     unsigned cur_code = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_11) << 7;
-//     //unsigned cur_code = 0;
-//     cur_code += HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) << 6;
-//     cur_code += HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7) << 5;
-//     cur_code += HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5) << 4;
-//     cur_code += HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3) << 3;
-//     cur_code += HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) << 2;
-//     cur_code += HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) << 1;
-//     cur_code += HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
-//     if (cur_code != io_code){
-//         //HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, (GPIO_PinState)cur_code);
-//         io_code = cur_code;
-//         //   OLED_ShowBinNum(2, 1, io_code, 8);
-//         uint8_t Test[10] = "12345678\n";
-//         itoa(io_code, Test, 8);
-//         while(HAL_USART_Transmit(getUsartH(), (uint8_t*)Test, sizeof(Test), 10));
-//         OLED_ShowBinNum(2, 1, io_code, 8);
-//     }
-    
-// }

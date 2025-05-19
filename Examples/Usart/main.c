@@ -24,12 +24,7 @@ void SysTick_Handler(void)
         OLED_ShowBinNum(2, 1, io_code, 8);        
         itoa(io_code, Test, 8);
         while(HAL_UART_Transmit(getUsartH(), (uint8_t*)Test, sizeof(Test), 10));
-    }
-    // while(HAL_USART_Receive(getUsartH(), (uint8_t*)Test, sizeof(Test), 10));
-    //Test[9] = '\n';
-    if (strncmp(Test, "123", 3) == 0) {
-        //while(HAL_USART_Transmit(getUsartH(), "123\n", sizeof(Test), 10));  
-    }  
+    }    
 }
 
 int main(void)
