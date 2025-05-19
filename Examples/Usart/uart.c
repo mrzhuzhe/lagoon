@@ -21,9 +21,10 @@ void itoa(uint32_t Number, char* output, uint32_t Length){
 UART_HandleTypeDef UartHandle;
 
 char ReceiveText[10] = "Init txt\n";
-
+unsigned ReceiveTextIdx = 0;
+uint8_t temp;
+  
 void Uart_init(){
-
 	
     GPIO_InitTypeDef  GPIO_InitStruct;
   
@@ -56,7 +57,7 @@ void Uart_init(){
     HAL_NVIC_EnableIRQ(USART1_IRQn);
     
     // Interrupt callback regist only can be call once 
-    HAL_UART_Receive_IT(&UartHandle, ReceiveText, sizeof(ReceiveText));
+    HAL_UART_Receive_IT(&UartHandle, &temp, 1);
 }
 
 UART_HandleTypeDef* getUsartH(){
@@ -65,9 +66,15 @@ UART_HandleTypeDef* getUsartH(){
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    HAL_UART_Transmit(&UartHandle, ReceiveText, sizeof(ReceiveText), 10);
+    // notice there will be only 9 last char must be \n
+    *(ReceiveText + ReceiveTextIdx) = temp;
+    if (++ReceiveTextIdx >= 10u) ReceiveTextIdx = 0;
+    if (temp == '\n') {
+        HAL_UART_Transmit(&UartHandle, ReceiveText, ReceiveTextIdx, 10);
+		ReceiveTextIdx = 0;
+	}
     // Interrupt callback regist only can be call once , so regist a new one for next interrupt 
-    HAL_UART_Receive_IT(&UartHandle, ReceiveText, sizeof(ReceiveText));
+    HAL_UART_Receive_IT(&UartHandle, &temp, 1);
     
 }
 
