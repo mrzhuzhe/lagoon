@@ -21,6 +21,7 @@ void itoa(uint32_t Number, char* output, uint32_t Length){
 UART_HandleTypeDef UartHandle;
 
 char ReceiveText[10] = "Init txt\n";
+char ShowText[10] = {0};
 unsigned ReceiveTextIdx = 0;
 uint8_t temp;
   
@@ -71,6 +72,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     if (++ReceiveTextIdx >= 10u) ReceiveTextIdx = 0; 
     if (temp == '\n') {
         HAL_UART_Transmit(&UartHandle, ReceiveText, ReceiveTextIdx, 10);
+        for (int i =0; i < 9; i++){
+            if (i < ReceiveTextIdx-1) {
+                ShowText[i] = ReceiveText[i];
+            } else {
+                ShowText[i] = '\0';
+            }
+        }
+        OLED_ShowString(3, 4, ShowText);        
 		ReceiveTextIdx = 0;
 	}    
     // Interrupt callback regist only can be call once , so regist a new one for next interrupt 
