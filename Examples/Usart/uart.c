@@ -66,13 +66,13 @@ UART_HandleTypeDef* getUsartH(){
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    // notice there will be only 9 last char must be \n
-    *(ReceiveText + ReceiveTextIdx) = temp;
-    if (++ReceiveTextIdx >= 10u) ReceiveTextIdx = 0;
+    // Notice there are a empty char in fist and a \n in last
+    *(ReceiveText + ReceiveTextIdx) = temp;   
+    if (++ReceiveTextIdx >= 10u) ReceiveTextIdx = 0; 
     if (temp == '\n') {
         HAL_UART_Transmit(&UartHandle, ReceiveText, ReceiveTextIdx, 10);
 		ReceiveTextIdx = 0;
-	}
+	}    
     // Interrupt callback regist only can be call once , so regist a new one for next interrupt 
     HAL_UART_Receive_IT(&UartHandle, &temp, 1);
     
